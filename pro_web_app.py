@@ -9,9 +9,7 @@ from google.genai import types
 # -----------------------------------------------------------
 if "GEMINI_API_KEY" in st.secrets:
     my_api_key = st.secrets["GEMINI_API_KEY"]
-else:
-    #
-    my_api_key = "AIzaSyAuaxPpzujWcarcPUZoZKsNpaF810lco4M"
+
 
 st.set_page_config(page_title="杜佳鹏的万能实验室", layout="wide")
 st.title("⚔️ 杜氏全栈 AI 助手")
@@ -86,4 +84,5 @@ if prompt := st.chat_input("请少侠出招..."):
             
             st.markdown(response.text)
             st.session_state.messages.append({"role": "assistant", "content": response.text})
+
 
