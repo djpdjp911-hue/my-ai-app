@@ -2,15 +2,17 @@ import streamlit as st
 import os
 from PIL import Image
 from google import genai
-from google.genai import types
 
-# -----------------------------------------------------------
-# 1. 配置与身份认证 (已自动填入您的 API Key)
-# -----------------------------------------------------------
-#
-my_api_key = "AIzaSyAuaxPpzujWcarcPUZoZKsNpaF810lco4M"
-os.environ["HTTP_PROXY"] = "http://127.0.0.1:7890"
-os.environ["HTTPS_PROXY"] = "http://127.0.0.1:7890"
+# 1. 部署环境不需要手动设置代理，Streamlit Cloud 默认可以访问 Google
+# os.environ["HTTP_PROXY"] = "http://127.0.0.1:7890"  <-- 删掉这两行
+# os.environ["HTTPS_PROXY"] = "http://127.0.0.1:7890" <-- 删掉这两行
+
+# 2. 安全读取密钥
+if "GEMINI_API_KEY" in st.secrets:
+    my_api_key = st.secrets["GEMINI_API_KEY"]
+else:
+    # 如果 Secrets 没配，先用你刚才提供的备用 (上线后建议删掉这行)
+    my_api_key = "AIzaSyAuaxPpzujWcarcPUZoZKsNpaF810lco4M"
 
 st.set_page_config(page_title="杜佳鹏的万能实验室", layout="wide")
 st.title("⚔️ 杜氏全栈 AI 助手")
