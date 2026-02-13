@@ -10,9 +10,6 @@ from google import genai
 # 2. 安全读取密钥
 if "GEMINI_API_KEY" in st.secrets:
     my_api_key = st.secrets["GEMINI_API_KEY"]
-else:
-    # 如果 Secrets 没配，先用你刚才提供的备用 (上线后建议删掉这行)
-    my_api_key = "AIzaSyAuaxPpzujWcarcPUZoZKsNpaF810lco4M"
 
 st.set_page_config(page_title="杜佳鹏的万能实验室", layout="wide")
 st.title("⚔️ 杜氏全栈 AI 助手")
@@ -71,4 +68,5 @@ if prompt := st.chat_input("请少侠出招..."):
             )
 
             st.markdown(response.text)
+
             st.session_state.messages.append({"role": "assistant", "content": response.text})
